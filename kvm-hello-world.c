@@ -204,6 +204,7 @@ int run_vm(struct vm *vm, struct vcpu *vcpu, size_t sz)
 				ioctl(simple,VMWRITE,contain);
 				ioctl(simple,VMREAD,contain);
 				printf("CR0_GUEST_HOST_MASK:%lx\n",*(contain->out_data));
+				continue;
 			}
 			/* fall through */
 		default:

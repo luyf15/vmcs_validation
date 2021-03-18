@@ -16,12 +16,17 @@ _start(void) {
 
 	*(long *) 0x400 = 42;
 
-	outb(0xAA,0x12);
 
 	asm volatile(
 		"mov %%cr0,%%eax\n\t"
+		"bts $0x1a,%%eax\n\t"
+		"mov %%eax,%%cr0\n\t"
 		:);
+	
+	outb(0xAA,0x12);
+
+
 	for (;;)
-		outb(0xE8,0xE8);	
-		//asm("hlt" : /* empty */ : "a" (42) : "memory");
+		//outb(0xE8,0xE8);	
+		asm("hlt" : /* empty */ : "a" (42) : "memory");
 }
